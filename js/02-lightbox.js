@@ -17,10 +17,5 @@ for (let i = 0; i < galleryItems.length; i++) {
 }
 let image = new SimpleLightbox(".gallery a", {
   captionDelay: 250,
+  additionalHtml: "opis obrazka",
 });
-// const imageName = (event) => {
-//   console.log(event.target.alt);
-
-// };
-
-// image.on("shown.simplelightbox", imageName);
