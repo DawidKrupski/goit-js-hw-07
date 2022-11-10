@@ -3,12 +3,6 @@ import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
 
-const clickElement = (event) => {
-  event.preventDefault();
-};
-
-gallery.addEventListener("click", clickElement);
-
 for (let i = 0; i < galleryItems.length; i++) {
   const div = document.createElement("div");
   gallery.append(div);
@@ -25,3 +19,24 @@ for (let i = 0; i < galleryItems.length; i++) {
   link.className = "gallery__link";
   link.href = `${galleryItems[i].original}`;
 }
+
+const clickElement = (event) => {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  const instance = basicLightbox.create(`
+    <img src=${event.target.dataset.source}>
+`);
+
+  instance.show(() => console.log("lightbox now visible"));
+  const clickEscape = (event) => {
+    if (event.keyCode === 27) {
+      gallery.removeEventListener("keydown", clickEscape);
+      instance.close(() => console.log("lightbox not visible anymore"));
+    }
+  };
+  gallery.addEventListener("keydown", clickEscape);
+};
+
+gallery.addEventListener("click", clickElement);
