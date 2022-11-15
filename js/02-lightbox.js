@@ -17,5 +17,5 @@ for (let i = 0; i < galleryItems.length; i++) {
 }
 let image = new SimpleLightbox(".gallery a", {
   captionDelay: 250,
-  additionalHtml: "opis obrazka",
+  captionsData: "alt",
 });
